@@ -1,3 +1,5 @@
+using System.Xml;
+
 public static class ArraySelector
 {
     public static void Run()
@@ -11,6 +13,22 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return [];
+        var output = new List<int>();
+        var list1Index = 0;
+        var list2Index = 0;
+        for (int i = 0; i < select.Length; i++)
+        {
+            if (select[i] == 1 )
+            {
+                list1Index++;
+                output.Add(list1[list1Index - 1]);
+            }
+            else if (select[i] == 2)
+            {
+                list2Index++;
+                output.Add(list2[list2Index - 1]);
+            }
+        }
+        return output.ToArray();
     }
 }
