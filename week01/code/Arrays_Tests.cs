@@ -49,7 +49,7 @@ public class RotateListRightTests
     [TestMethod]
     public void TestRotateListRight_Rotate3()
     {
-        List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9};
         Arrays.RotateListRight(numbers, 3);
         CollectionAssert.AreEqual(new List<int> { 7, 8, 9, 1, 2, 3, 4, 5, 6 }, numbers);
     }
