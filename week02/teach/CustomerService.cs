@@ -15,6 +15,9 @@ public class CustomerService {
         // Expected Result: 
         Console.WriteLine("Test 1");
 
+        var cservice = new CustomerService(8);
+        cservice.AddNewCustomer();
+        cservice.ServeCustomer();
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
