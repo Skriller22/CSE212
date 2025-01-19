@@ -12,6 +12,7 @@ public class TakingTurnsQueueTests
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    // Error: Expected Sue, but got Bob. -This was because somewhere in the code the queue was not being updated correctly after the first iteration. It looks like the que isn't rotating to the next person.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -44,6 +45,7 @@ public class TakingTurnsQueueTests
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: 
+    // Error: Expected Bob, but got Sue. Because the queue is removing and returning the person at the same index every time. The person should be placed on the other side of the queue so that it is rotated through.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -86,6 +88,8 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    // Error: Expected Bob but got sue, this was because the queue was not being updated correctly after the first iteration.
+    // Error: Expected Tim but got Sue, this was because Tim was not returned to the queue after being removed.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -117,6 +121,8 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
+    // Error: Expected Bob but got sue, this was because the queue was not being updated correctly after the first iteration.
+    // Error: Expected Tim but got Sue, this was because Tim was not returned to the queue after being removed. 
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -144,6 +150,7 @@ public class TakingTurnsQueueTests
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
     // Defect(s) Found: 
+    // Passed Tests
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
