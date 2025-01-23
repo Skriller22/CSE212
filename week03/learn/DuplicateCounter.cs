@@ -105,7 +105,7 @@ public class DuplicateCounter
 
         return duplicates;
 
-        // I tried some AI after completing the assignment and it said it could make a more efficient version of my code... I'm not sure I believe it after seeing the results. It is slow, innefficient, and was actually incorrect until I fixed a bool check. I'm not sure what the AI was thinking. I guess it avoids potential collisions at least.
+        // I tried some AI after completing the assignment and it said it could make a more efficient version of my code... I'm not sure I believe it after seeing the results. It is slow, innefficient, and was actually incorrect until I fixed a bool check. I guess it avoids potential collisions at least.
     }
 
     private static void MeasureExecutionTime(Func<int> function, string functionName)
