@@ -1,4 +1,6 @@
-﻿public class DuplicateCounter
+﻿using System.Diagnostics;
+
+public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 
@@ -20,11 +22,97 @@
 
         Console.WriteLine($"Number of items in the collection: {data.Length}");
         Console.WriteLine($"Number of duplicates : {CountDuplicates(data)}");
+        Console.WriteLine();
+        Console.WriteLine("Me just messing around:");
+        MeasureExecutionTime(() => CountDuplicates(data), "CountDuplicates");
+        MeasureExecutionTime(() => CountDuplicatesAlternate(data), "CountDuplicatesAlternate");
+        MeasureExecutionTime(() => CountDuplicatesUsingDictionary(data), "CountDuplicatesUsingDictionary");
     }
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        //Find the largest number in the array and create hashset with that many spaces
+        //Using this method I would maybe create a hard-cap or maybe a check to see if the array is too large
+        int max = data.Max();
+        HashSet<int> hashSet = new HashSet<int>(max);
+
+        //Create a counter for the number of duplicates
+        int duplicates = 0;
+
+        //Iterate through the array
+        foreach (int number in data)
+        {
+            //If the number is already in the hashset, increment the duplicates counter
+            if (hashSet.Contains(number))
+                duplicates++;
+            //If the number is not in the hashset, add it
+            else
+                hashSet.Add(number);
+        }
+
+
+        // After the fact, this function could actually be used to reduce memory usage. It could initially count the duplicates and then subtract that from the max number in any future calls.
+        // Another way to accomplish this task would be to store the uniques in a list and then return the count of the duplicates.
+        // Actually... I'm going to do that and compare the complexity of the two methods.
+        return duplicates;
+    }
+    private static int CountDuplicatesAlternate(int[] data)
+    {
+        // Create hashset for each unique number
+        var unique = new HashSet<int>();
+        // Create counter for duplicates
+        var duplicates = 0;
+
+        // Iterate through array and count every time a unique entry is encountered again. Otherwise, add to unique hashset.
+        foreach (var x in data)
+        {
+            if (unique.Contains(x))
+                duplicates++;
+            else
+                unique.Add(x);
+        }
+        return duplicates;
+
+        // Interestingly enough, this method seems to take longer. But maybe it uses less resources compared the the larger hashset?
+    }
+
+    private static int CountDuplicatesUsingDictionary(int[] data)
+    {
+        // Create a dictionary to store the frequency of each number
+        var frequency = new Dictionary<int, int>();
+        // Create a counter for duplicates
+        int duplicates = 0;
+
+        // Iterate through the array
+        foreach (int number in data)
+        {
+            // If the number is already in the dictionary, increment its count
+            if (frequency.ContainsKey(number))
+            {
+                frequency[number]++;
+                // If the count becomes 2, it means we have found a duplicate
+                if (frequency[number] == 2)
+                {
+                    duplicates++;
+                }
+            }
+            // If the number is not in the dictionary, add it with a count of 1
+            else
+            {
+                frequency[number] = 1;
+            }
+        }
+
+        return duplicates;
+
+        // I tried some AI after completing the assignment and it said it could make a more efficient version of my code... I'm not sure I believe it after seeing the results. It is slow, innefficient, and actually incorrect. I'm not sure what the AI was thinking.
+    }
+
+    private static void MeasureExecutionTime(Func<int> function, string functionName)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        int result = function();
+        stopwatch.Stop();
+        Console.WriteLine($"{functionName} took {stopwatch.ElapsedTicks} ticks or {stopwatch.Elapsed.TotalMilliseconds:F3} ms to find {result} duplicates.");
     }
 }
