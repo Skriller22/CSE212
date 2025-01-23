@@ -90,8 +90,8 @@ public class DuplicateCounter
             if (frequency.ContainsKey(number))
             {
                 frequency[number]++;
-                // If the count becomes 2, it means we have found a duplicate
-                if (frequency[number] == 2)
+                // If the count is more than or equal to 2, it means we have found a duplicate
+                if (frequency[number] >= 2)
                 {
                     duplicates++;
                 }
@@ -105,7 +105,7 @@ public class DuplicateCounter
 
         return duplicates;
 
-        // I tried some AI after completing the assignment and it said it could make a more efficient version of my code... I'm not sure I believe it after seeing the results. It is slow, innefficient, and actually incorrect. I'm not sure what the AI was thinking.
+        // I tried some AI after completing the assignment and it said it could make a more efficient version of my code... I'm not sure I believe it after seeing the results. It is slow, innefficient, and was actually incorrect until I fixed a bool check. I'm not sure what the AI was thinking. I guess it avoids potential collisions at least.
     }
 
     private static void MeasureExecutionTime(Func<int> function, string functionName)
