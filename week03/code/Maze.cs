@@ -33,6 +33,24 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        // Check if the current location is in the dictionary
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+            // Check if the left direction is valid
+            if (directions[0])
+            {
+                //change the X location 1 to the left
+                _currX--;
+            }
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -42,6 +60,24 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        // Check if the current location is in the dictionary
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+            // Check if the right direction is valid
+            if (directions[1])
+            {
+                //change the X location 1 to the right
+                _currX++;
+            }
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -51,6 +87,24 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        // Check if the current location is in the dictionary
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+            // Check if the up direction is valid
+            if (directions[2])
+            {
+                //change the Y location 1 up
+                _currY--;
+            }
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -60,6 +114,24 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        // Check if the current location is in the dictionary
+        if (_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+            // Check if the down direction is valid
+            if (directions[3])
+            {
+                //change the Y location 1 down
+                _currY++;
+            }
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()
