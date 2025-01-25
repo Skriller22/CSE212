@@ -113,41 +113,34 @@ public static class SetsAndMaps
             return false;
         }
 
-        var dict1 = new Dictionary<char, int>();
-        foreach (char letter in word1)
+        var charCount = new Dictionary<char, int>();
+        foreach (char c in word1)
         {
-            if (dict1.TryGetValue(letter, out int count))
+            if (charCount.ContainsKey(c))
             {
-                dict1[letter] = count + 1;
+                charCount[c]++;
             }
             else
             {
-                dict1[letter] = 1;
+                charCount[c] = 1;
             }
         }
-
-        var dict2 = new Dictionary<char, int>();
-        foreach (char letter in word2)
+        foreach (char c in word2)
         {
-            if (dict2.TryGetValue(letter, out int count))
+            if (charCount.ContainsKey(c))
             {
-                dict2[letter] = count + 1;
+                charCount[c]--;
+                if (charCount[c] == 0)
+                {
+                    charCount.Remove(c);
+                }
             }
             else
-            {
-                dict2[letter] = 1;
-            }
-        }
-
-        foreach (var key in dict1.Keys)
-        {
-            if (!dict2.TryGetValue(key, out int count) || dict1[key] != count)
             {
                 return false;
             }
         }
-
-        return true;
+        return charCount.Count == 0;
     }
 
     /// <summary>
