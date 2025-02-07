@@ -181,7 +181,7 @@ public static class Recursion
         // Base case: If we are at the end of the maze, add the path to the results list
         if (maze.IsEnd(x, y))
         {
-            results.Add(PathToString(currPath));
+            results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
             currPath.RemoveAt(currPath.Count - 1); // Remove the last element from the path
             return;
         }
@@ -193,12 +193,5 @@ public static class Recursion
         if (maze.IsValidMove(currPath, x, y - 1)) SolveMaze(results, maze, x, y - 1, currPath); //move up
 
         currPath.RemoveAt(currPath.Count - 1); // Remove the last element from the path
-
-        results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
-    }
-
-    private static string PathToString(List<ValueTuple<int, int>> path)
-    {
-        return string.Join(" -> ", path);
     }
 }
